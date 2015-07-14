@@ -1,173 +1,128 @@
-<!DOCTYPE html> <html> <head><title>Talk Schedule</title>
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <style>
-        /* Space out content a bit */
-        body { padding-top: 20px;
-        padding-bottom: 20px; }
-        /* Everything but the jumbotron gets side spacing for mobile first views */
-        .header, .marketing, .footer {
-        padding-left: 15px;
-        padding-right: 15px;
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <style>
+        @font-face {
+            font-family: 'Lato';
+            src: url('{{ url_for('static', filename='media/fonts/lato-regular-webfont.eot') }}');
+            src: url('{{ url_for('static', filename='media/fonts/lato-regular-webfont.eot?#iefix') }}') format('embedded-opentype'),
+                 url('{{ url_for('static', filename='media/fonts/lato-regular-webfont.woff2') }}') format('woff2'),
+                 url('{{ url_for('static', filename='media/fonts/lato-regular-webfont.woff') }}') format('woff'),
+                 url('{{ url_for('static', filename='media/fonts/lato-regular-webfont.ttf') }}') format('truetype'),
+                 url('{{ url_for('static', filename='media/fonts/lato-regular-webfont.svg#latoregular') }}') format('svg');
+            font-weight: normal;
+            font-style: normal;
         }
-        /* Custom page header */
-        .header {
-        border-bottom: 1px solid #e5e5e5;
+
+        * {
+            margin: 0;
+            padding: 0;
         }
-        /* Make the masthead heading the same height as the navigation */
-        .header h3 { margin-top: 0; margin-bottom: 0; line-height: 40px; padding-bottom: 19px; } /* Custom page footer */ .footer { padding-top: 19px; color: #777; border-top: 1px solid #e5e5e5; } /* Customize container */ @media (min-width: 768px) { .container { max-width: 730px; } } .container-narrow > hr { margin: 30px 0; } /* Main marketing message and sign up button */ .jumbotron { text-align: center; border-bottom: 1px solid #e5e5e5; } .jumbotron .btn { font-size: 21px; padding: 14px 24px; } /* Supporting marketing content */
 
-        .marketing {
-        margin: 40px 0;
-      }
-
-      .marketing p + h4 {
-        margin-top: 28px;
-      }
-
-      /* Responsive: Portrait tablets and up */
-      @media screen and (min-width: 768px) {
-        /* Remove the padding we set earlier */
-        .header,
-        .marketing,
-        .footer {
-          padding-left: 0;
-          padding-right: 0;
+        html, body {
+            height: 100%;
         }
-        /* Space out the masthead */
-        .header {
-          margin-bottom: 30px;
+
+        html {
+            font-size: 10px;
         }
-        /* Remove the bottom border on the jumbotron for visual effect */
-        .jumbotron {
-          border-bottom: 0;
+
+        body {
+            background: #91c3b9;
+            color: white;
+
+            font-family: 'Lato';
+
+            font-size: 1.6rem;
         }
-      }
-        .sidebar {
-            float:left;
-            width:15%;
-            padding: 10px;
-            background:#c9c;
-    }
-        /*MENU CSS*/
-        .hidden {
-    float: left;
-    height:350px;
-    width:25%;
-    z-index:2;
-    position:absolute;
-    left:-1000px;
-    background:#f90;
-    color:#000;
-}
 
-.clear {
-    clear:both;
-}
+        header {
+            height: 15vh;
 
-    </style>
+            position: relative;
+        }
 
-    <!-- Include moment.js -->
-    <script src="/static/moment.min.js"></script>
-   <script src="/static/jquery-2.1.4.min.js"></script>
-    <script src="/static/jquery.anyslider.js"></script>
-    <script src="/static/jquery.easing.1.3.js"></script>
+        header h1 {
+            width: 70%;
+            background: white;
 
-    <link rel="stylesheet" href="/static/jquery-anyslider.css"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+            position: absolute;
+            top: 0;
+            bottom: 0;
 
-    <script>
-    function startTime() {
-        var today=new Date();
-        var h=today.getHours();
-        var m=today.getMinutes();
-        var s=today.getSeconds();
-        m = checkTime(m);
-        s = checkTime(s);
-        document.getElementById('time').innerHTML = h+":"+m+":"+s;
-        var t = setTimeout(function(){startTime()},500);
-    }
+            white-space: nowrap;
+            text-indent: 100%;
+            overflow: hidden;
 
-    function checkTime(i) {
-        if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
-        return i;
-    }
-    </script>
-  </head>
-  <body onload="startTime()">
-      <div class="sidebar" >
-          <h4 id="time"> Time: {{momentjs(timestamp).format('HH:mm:ss')}} </h4>
-          <p id="date">Date: {{momentjs(timestamp).format('YYYY-MM-DD')}} </p>
-      </div>
-      <div class="container">
-          <div class="header">
-        <!-- <h3 class="text-muted">EuroPython 2015</h3> -->
-              <img src="/static/media/ep_logo.png" height="100" ></img>
-              <h3 class="text-muted">HALL INFORMATION</h3>
-          </div>
-          <div class="row marketing">
+            background: white url({{ url_for('static', filename='media/ep_logo.png') }}) no-repeat 5% center;
+            background-size: auto 60%;
+        }
 
-                <div class="col-lg-12">
-                  <!-- Render formated time -->
-                  <br>
-                  Next talk {{momentjs(timestamp).from_now()}} {{next_talk}}
-                </div>
-                {% if talks %}
-                {% for t in talks %}
-                    {{ t }} <br>
-                {% endfor %}
-                {% endif %}
-          </div>
-          <div class="slider-wrapper">
-                <div class="slider slider1">
-                    <div>
-                        Barria Room<br>
-                        Talk
-                    </div>
-                    <div>
-                        Python Anywhere Room <br>
-                        Talk
-                    </div>
-                </div>
-          </div>
-          <div class="footer">
-              <div class=".col-xs-6 .col-sm-3">
-                  <img src="/static/media/sponsors/brandsite_c.png" height="30"></img>
-              </div>
-              <div class=".col-xs-6 .col-sm-3">
-                  <img src="/static/media/sponsors/Bilbao web.jpg" height="30"></img>
-              </div>
-              <div class=".col-xs-6 .col-sm-3">
-                  <img src="/static/media/sponsors/DataRobot Logo Vector.png" height="30"></img>
-              </div>
-              <div class=".col-xs-6 .col-sm-3">
-                  <img src="/static/media/sponsors/CloudMas Logo Grande (raster).png" height="30"></img>
-              </div>
-        <p>&copy; Asociación de ciencias de la programación Python San Sebastián | www.pyss.org </p>
-      </div>
-    </div> <!-- /container -->
+        header time {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
 
-      <!-- we should put this iframe somehow -->
-     <!-- <iframe src="http://smartfeedz.com/livepage/demo/live/europython-2/?token=5da16b3711df7a7447420a02b34f0b4a2e9df684#/projectorm"  height="200"></iframe> -->
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-      <script>
-   $(function () {
-        $('.slider2').anyslider({
-            animation: 'fade',
-            interval: 3000,
-            reverse: true,
-            showControls: false,
-            startSlide: 2
-        });
-        $('.slider1').anyslider({
-            easing: 'easeOutBounce',
-            interval: 300,
-            keyboard: false,
-            speed: 1500
-        });
-    });
-    </script>
-  </body>
+            width: 30%;
+
+            font-size: 4rem;
+        }
+
+        header time:before {
+            content: '';
+            display: inline-block;
+
+            height: 30%;
+            width: 20%;
+
+            background: url({{ url_for('static', filename='media/hour.png') }}) no-repeat center;
+            background-size: contain;
+        }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+
+        <header>
+            <h1>Logo</h1>
+            <time>11.00</time>
+        </header>
+
+        <section>
+            <h2>Current talk</h2>
+            <h1>asd</h1>
+
+            <footer>
+                <p class="room">room</p>
+                <p class="speaker">speaker</p>
+            </footer>
+        </section>
+
+        <footer>
+            <p class="next-talk">next talk</p>
+
+            <ul class="sponsors">
+                sponsor
+            </ul>
+        </footer>
+
+    </body>
 </html>
-
-
-
