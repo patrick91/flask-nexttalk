@@ -23,6 +23,29 @@
             font-style: normal;
         }
 
+        @font-face {
+            font-family: 'Lato';
+            src: url('{{ url_for('static', filename='media/fonts/lato-bold-webfont.eot') }}');
+            src: url('{{ url_for('static', filename='media/fonts/lato-bold-webfont.eot?#iefix') }}') format('embedded-opentype'),
+                 url('{{ url_for('static', filename='media/fonts/lato-bold-webfont.woff2') }}') format('woff2'),
+                 url('{{ url_for('static', filename='media/fonts/lato-bold-webfont.woff') }}') format('woff'),
+                 url('{{ url_for('static', filename='media/fonts/lato-bold-webfont.ttf') }}') format('truetype'),
+                 url('{{ url_for('static', filename='media/fonts/lato-bold-webfont.svg#latobold') }}') format('svg');
+            font-weight: bold;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Lato';
+            src: url('{{ url_for('static', filename='media/fonts/lato-black-webfont.eot') }}');
+            src: url('{{ url_for('static', filename='media/fonts/lato-black-webfont.eot?#iefix') }}') format('embedded-opentype'),
+                 url('{{ url_for('static', filename='media/fonts/lato-black-webfont.woff2') }}') format('woff2'),
+                 url('{{ url_for('static', filename='media/fonts/lato-black-webfont.woff') }}') format('woff'),
+                 url('{{ url_for('static', filename='media/fonts/lato-black-webfont.ttf') }}') format('truetype'),
+                 url('{{ url_for('static', filename='media/fonts/lato-black-webfont.svg#latoblack') }}') format('svg');
+            font-weight: 900;
+            font-style: normal;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -34,6 +57,11 @@
 
         html {
             font-size: 10px;
+            box-sizing: border-box;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
         }
 
         body {
@@ -92,6 +120,118 @@
             background: url({{ url_for('static', filename='media/hour.png') }}) no-repeat center;
             background-size: contain;
         }
+
+        section {
+            height: 75vh;
+
+            padding: 10vh 3%;
+
+            position: relative;
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3f9183;
+
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+
+            margin-bottom: 2vh;
+        }
+
+        section .wrap {
+            width: 80%;
+        }
+
+        section footer {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: absolute;
+            bottom: 3vh;
+            height: 10vh;
+        }
+
+        section dl {
+            display: inline-block;
+
+            vertical-align: top;
+        }
+
+        section dt {
+            display: block;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: #3f9183;
+            font-weight: bold;
+
+            margin-bottom: 0.5rem;
+        }
+
+        section dd {
+            display: block;
+            font-weight: bold;
+            opacity: 0.5;
+
+            font-size: 2rem;
+        }
+
+        section .room:before {
+            content: '';
+            display: inline-block;
+
+            height: 5rem;
+            width: 6rem;
+
+            background: url({{ url_for('static', filename='media/room.png') }}) no-repeat center;
+            background-size: contain;
+        }
+
+        section .speaker:before {
+            content: '';
+            display: inline-block;
+
+            height: 5rem;
+            width: 6rem;
+
+            margin-left: 3vw;
+
+            background: url({{ url_for('static', filename='media/speaker.png') }}) no-repeat center;
+            background-size: contain;
+        }
+
+        section h1 {
+            font-weight: 900;
+            font-size: 6rem;
+
+            display: inline;
+
+            background: rgba(0, 0, 0, 0);
+            background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, #e55d34 10.1%, #e55d34 89.9%, rgba(0, 0, 0, 0) 90%, rgba(231,56,39,0) 100%);
+            background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(10%, rgba(0, 0, 0, 0)), color-stop(10.1%, #e55d34), color-stop(71%, rgba(240,47,23,1)), color-stop(89%, rgba(234,53,33,1)), color-stop(90%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(231,56,39,0)));
+            background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, #e55d34 10.1%, #e55d34 89.9%, rgba(0, 0, 0, 0) 90%, rgba(231,56,39,0) 100%);
+            background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, #e55d34 10.1%, #e55d34 89.9%, rgba(0, 0, 0, 0) 90%, rgba(231,56,39,0) 100%);
+            background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, #e55d34 10.1%, #e55d34 89.9%, rgba(0, 0, 0, 0) 90%, rgba(231,56,39,0) 100%);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, #e55d34 10.1%, #e55d34 89.9%, rgba(0, 0, 0, 0) 90%, rgba(231,56,39,0) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#e73827', GradientType=0 );
+
+            color: white;
+            padding: 0.5rem;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        body > footer {
+            height: 10vh;
+
+            position: relative;
+
+            background: #55aa9c;
+        }
         </style>
     </head>
     <body>
@@ -108,11 +248,27 @@
 
         <section>
             <h2>Current talk</h2>
-            <h1>asd</h1>
+            <div class="wrap">
+                <h1>Getting started with Bokeh
+                Let's build an interactive data
+                visualization for the web...
+                in Python!</h1>
+            </div>
+
 
             <footer>
-                <p class="room">room</p>
-                <p class="speaker">speaker</p>
+                <div class="room">
+                    <dl>
+                        <dt>Room</dt>
+                        <dd>GoogleRoom</dd>
+                    </dl>
+                </div>
+                <div class="speaker">
+                    <dl>
+                        <dt>Speaker</dt>
+                        <dd>Guido Van Rossum</dd>
+                    </dl>
+                </div>
             </footer>
         </section>
 
